@@ -2,6 +2,8 @@ package com.morgan.TaiwanLottery.model;
 
 import java.util.Date;
 
+import com.morgan.TaiwanLottery.POJO.LotteryObj;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,18 +11,26 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Lottery539 {
+public class Lottery539 extends LotteryObj{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer lottery539id;
 	
 	@Column(columnDefinition = "VARCHAR(30)")
 	private String lotterynumbers;
-	
+	@Column(columnDefinition = "Integer")
+	private Integer lotteryperiod;
 	@Column(columnDefinition = "DATETIME")
 	private Date lotterytime;
 	@Column(columnDefinition = "DATETIME")
 	private Date createtime;
+	
+	public Integer getLotteryperiod() {
+		return lotteryperiod;
+	}
+	public void setLotteryperiod(Integer lotteryperiod) {
+		this.lotteryperiod = lotteryperiod;
+	}
 	public Integer getLottery539id() {
 		return lottery539id;
 	}
