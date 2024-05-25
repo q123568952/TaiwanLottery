@@ -8,4 +8,5 @@ import com.morgan.TaiwanLottery.model.Lottery539;
 @Repository
 public interface Lottery539Repository extends JpaRepository<Lottery539, Integer>{
 
+	Lottery539 findFirstByOrderByLotterytimeDesc();
 }

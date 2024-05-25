@@ -1,23 +1,26 @@
 package com.morgan.TaiwanLottery.utils;
 
 import java.text.SimpleDateFormat;
+import java.time.Month;
+import java.time.MonthDay;
+import java.time.Year;
+import java.time.YearMonth;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import com.morgan.TaiwanLottery.dao.Lottery539Repository;
 import com.morgan.TaiwanLottery.model.Lottery539;
-
-import jakarta.annotation.PostConstruct;
 
 @Component
 public class crawlertool {	
+	
+	
 	
 	//https://api.taiwanlottery.com/TLCAPIWeB/Lottery/Daily539Result?period&month=${startyear}-${startmonth}&pageSize=31`;
 	public static String bsURL = "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/Daily539Result"; 
@@ -52,6 +55,40 @@ public class crawlertool {
 		}
 		
 		return lottery539s;
+	}
+	//比較日期資料到現在有多少期別需要補資料
+	//發行日期2007/01/01
+	public static void checkDate(Date dbdate) {
+		Integer startYear = 2007;
+		Integer startMonth = 1;	
+		Integer startDay = 1;			
+		Integer nowYear= YearMonth.now().getYear();
+		Integer nowMonth = YearMonth.now().getMonthValue();
+		Integer nowDay = MonthDay.now().getDayOfMonth();
+		Integer dbYear=0;
+		Integer dbMonth=0;
+		Integer dbDay=0;
+		if(dbdate!=null) {
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(dbdate);
+			dbYear=calendar.get(calendar.YEAR);
+			//0起算
+			dbMonth=calendar.get(calendar.MONTH)+1;
+			dbDay=calendar.get(calendar.DAY_OF_MONTH);
+		}else {
+			dbYear=startYear;
+			dbMonth=startMonth;
+			dbDay=startDay;
+		}	
+		
+		
+		
+		System.out.println(dbYear);
+		System.out.println(dbMonth);
+		System.out.println(dbDay);
+		System.out.println(nowYear);
+		System.out.println(nowMonth);
+		System.out.println(nowDay);
 	}
 		
 }
