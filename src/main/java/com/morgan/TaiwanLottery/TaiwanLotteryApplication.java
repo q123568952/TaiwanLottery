@@ -1,14 +1,16 @@
 package com.morgan.TaiwanLottery;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.morgan.TaiwanLottery.dao.Lottery539Repository;
 import com.morgan.TaiwanLottery.model.Lottery539;
@@ -39,19 +41,56 @@ public class TaiwanLotteryApplication {
 	 TimerTask task1 = new TimerTask() {
 		@Override
 		public void run() {	
-			List<Lottery539> lottery539s;
+			
 			try {				
-				Lottery539 lastLottery539 = lottery539Repository.findFirstByOrderByLotterytimeDesc();
-				
-				
+				Lottery539 lastLottery539 = lottery539Repository.findFirstByOrderByLotterytimeDesc();				
+				List<Map<String, List<Integer>>> allYearMonth;
 				if(lastLottery539!=null) {
-					crawlertool.checkDate(lastLottery539.getLotterytime());
+					allYearMonth = crawlertool.checkDate(lastLottery539.getLotterytime());
 				}else {
-					crawlertool.checkDate(null);					
+					allYearMonth=crawlertool.checkDate(null);					
 				}	
 				//撈資料存資料庫
-				//lottery539s = crawlertool.mapToLotteryObj(crawlertool.get539records("2024","04"));
-				//lottery539Repository.saveAll(lottery539s);
+				System.out.println(allYearMonth);
+				for (Map<String, List<Integer>> ele : allYearMonth) {
+					List<Integer> year = ele.get("year");
+					List<Integer> months = ele.get("month");					
+					for (Integer month : months) {						
+						try {	
+							if(lastLottery539!=null) {
+								Date dbdate = lastLottery539.getLotterytime();
+								Calendar calendar = Calendar.getInstance();
+								calendar.setTime(dbdate);
+								if(year.get(0)==calendar.get(calendar.YEAR)&&month==calendar.get(calendar.MONTH)+1) {
+									List<Lottery539> lottery539s = crawlertool.mapToLotteryObj(crawlertool.get539records(year.get(0),month));
+									List<Lottery539> filterlottery539s = new  ArrayList<>();
+									for (Lottery539 lt539 : lottery539s) {
+										if(lt539.getLotterytime().getDate()>dbdate.getDate()) {
+											filterlottery539s.add(lt539);
+										}
+									}									
+									lottery539Repository.saveAll(filterlottery539s);
+								}else {
+									
+									List<Lottery539> lottery539s = crawlertool.mapToLotteryObj(crawlertool.get539records(year.get(0),month));
+									
+									lottery539Repository.saveAll(lottery539s);
+								}
+							}else {								
+								List<Lottery539> lottery539s = crawlertool.mapToLotteryObj(crawlertool.get539records(year.get(0),month));
+								lottery539Repository.saveAll(lottery539s);
+							}	
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+					
+				}
+				
+				
+				
+				
 				
 				
 			} catch (Exception e) {
@@ -61,7 +100,7 @@ public class TaiwanLotteryApplication {
 		}		 
 	 };
 	 
-	 timer.schedule(task1, 2000,10000);
+	 timer.schedule(task1, 2000,86400000);
 		
 	}
 
