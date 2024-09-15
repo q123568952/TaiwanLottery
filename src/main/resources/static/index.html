@@ -5,17 +5,62 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <!-- Import style -->
+  <link rel="stylesheet" href="//unpkg.com/element-plus/dist/index.css" />
+  <!-- Import Vue 3 -->
+  <script src="//unpkg.com/vue@3"></script>
+  <!-- Import component library -->
+  <script src="//unpkg.com/element-plus"></script>
     <link rel="icon" href="/favicon.ico">
-    <title>my-vue-app</title>  
-    <link href="/css/app.2cf79ad6.css" rel="stylesheet">
+    <title>今彩539分析</title>  
+    
 </head>
 
 <body><noscript><strong>We're sorry but my-vue-app doesn't work properly without JavaScript enabled. Please enable it to
             continue.</strong></noscript>
     <div id="app">
     <h1>我要開始用囉</h1>
-    
+<div>
+  <el-table :data="tableData" stripe  style="width: 100%">
+    <el-table-column prop="date" label="Date" width="180" ></el-table-column>
+    <el-table-column prop="name" label="Name" width="180" ></el-table-column>
+    <el-table-column prop="address" label="Address" ></el-table-column>
+  </el-table>
+</div>    
     </div>
 </body>
-
+<script lang="js" setup>
+const App = {
+        data() {
+          return {
+        	  tableData : [
+        			{
+        		          date: '2016-05-03',
+        		          name: 'Tom',
+        		          address: 'No. 189, Grove St, Los Angeles',
+        		        },
+        		        {
+        		          date: '2016-05-02',
+        		          name: 'Tom',
+        		          address: 'No. 189, Grove St, Los Angeles',
+        		        },
+        		        {
+        		          date: '2016-05-04',
+        		          name: 'Tom',
+        		          address: 'No. 189, Grove St, Los Angeles',
+        		        },
+        		        {
+        		          date: '2016-05-01',
+        		          name: 'Tom',
+        		          address: 'No. 189, Grove St, Los Angeles',
+        		        }
+        		]
+          };
+        },
+      };
+      const app = Vue.createApp(App);
+      app.use(ElementPlus);
+      app.mount("#app");
+    	
+    </script>
 </html>
