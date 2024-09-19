@@ -1,25 +1,13 @@
-<template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <div>
-      <p>
-        If Element is successfully added to this project, you'll see an
-        <code v-text="'<el-button>'"></code>
-        below
-      </p>
-      <el-button>gggggggg</el-button>
-    </div>
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+<template>  
+  <Lottery539Table/>
 </template>
-
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Lottery539Table from './components/Lottery539Table.vue';
 
 export default {
   name: 'app',
-  components: {
-    HelloWorld
+  components: {    
+    Lottery539Table    
   }
 }
 </script>
