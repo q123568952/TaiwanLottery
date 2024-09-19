@@ -1,13 +1,15 @@
 <template>  
-  <Lottery539Table/>
+
+  <PageSkele/>
+
 </template>
 <script>
-import Lottery539Table from './components/Lottery539Table.vue';
+import PageSkele from './components/PageSkele.vue';
 
 export default {
   name: 'app',
-  components: {    
-    Lottery539Table    
+  components: {     
+    PageSkele   
   }
 }
 </script>
