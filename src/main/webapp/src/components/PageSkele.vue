@@ -87,6 +87,7 @@
 </template>
 <script setup>
 import Lottery539Table from './Lottery539Table.vue';
+import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
 </script>
 <style scoped>
 .layout-container-demo .el-header {
