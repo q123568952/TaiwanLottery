@@ -2,7 +2,14 @@
   <el-container class="layout-container-demo" style="height: 500px">
     <el-aside width="200px">
       <el-scrollbar>
-        <el-menu :default-openeds="['1', '3']">
+        <el-menu :default-openeds="['1', '3']"
+        active-text-color="#ffd04b"
+        background-color="#545c64"
+        class="el-menu-vertical-demo"
+        default-active="2"
+        text-color="#fff"
+        @open="handleOpen"
+        @close="handleClose">
           <el-sub-menu index="1">
             <template #title>
               <el-icon><message /></el-icon>Navigator One
@@ -92,12 +99,12 @@ import { Menu as IconMenu, Message, Setting } from '@element-plus/icons-vue'
 <style scoped>
 .layout-container-demo .el-header {
   position: relative;
-  background-color: var(--el-color-primary-light-7);
+  background-color: var(--el-color-primary-light-9);
   color: var(--el-text-color-primary);
 }
 .layout-container-demo .el-aside {
   color: var(--el-text-color-primary);
-  background: var(--el-color-primary-light-8);
+  background: var(--el-color-primary-light-9);
 }
 .layout-container-demo .el-menu {
   border-right: none;
