@@ -20,7 +20,10 @@ export default {
           "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
       }})
       .then((response) => {
-        console.log(response.data)
+
+        console.log(response.data)        
+        let dataa = JSON.parse(response.data)
+        console.log(dataa)        
       })
       .catch((error) => {
         console.log(error)
