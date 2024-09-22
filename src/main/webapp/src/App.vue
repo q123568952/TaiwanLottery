@@ -10,6 +10,21 @@ export default {
   name: 'app',
   components: {     
     PageSkele   
+  },
+  created () {
+    this.axios
+      .get('http://localhost:8080/test/1/2',{
+        headers: {
+       "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+          "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
+      }})
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 }
 </script>
