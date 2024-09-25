@@ -27,11 +27,11 @@ public class Lottery539Controller {
 		System.out.println(page);
 		return page+":"+uploadamount;
 	}
-	@GetMapping("/findAll")
+	@GetMapping("/findAll/{page}/{uploadamount}")
 	@CrossOrigin
-	public List<Lottery539> findAll(HttpServletRequest req) {
+	public List<Lottery539> findAll(@PathVariable Integer page, @PathVariable Integer uploadamount,HttpServletRequest req) {
 		
-		return lottery539Service.findAll();
+		return lottery539Service.findAll(page,uploadamount);
 	}
 
 }
