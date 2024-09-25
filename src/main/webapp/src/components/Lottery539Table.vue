@@ -1,31 +1,34 @@
 <template>
   <el-table :data="tableData" stripe style="width: 100%">
-    <el-table-column prop="date" label="Date" width="180" />
-    <el-table-column prop="name" label="Name" width="180" />
-    <el-table-column prop="address" label="Address" />
+    <el-table-column prop="lotterytime" label="開獎時間"  />
+    <el-table-column prop="lotterynumbers" label="開獎號碼"  />
   </el-table>
 </template>
-<script setup>
-const tableData = [
-  {
-    date: '2016-05-03',
-    name: 'eee',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-02',
-    name: 'qqq',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-04',
-    name: 'Towwwm',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-  {
-    date: '2016-05-01',
-    name: 'ee',
-    address: 'No. 189, Grove St, Los Angeles',
-  },
-]
+
+<script>
+   export default {    
+    data() {
+      return {
+        pagination: {//分頁
+        currentPage: 0,
+        pageSize: 10,
+        total: 100,
+        queryString: null,
+      },    
+      tableData: [],     
+      }  
+    },
+    //VUE初始化執行
+    created() {
+      this.findPage();
+    },
+    methods: {    
+      //查询
+      findPage() {      
+        this.axios.get(`http://localhost:8080/findAll/${this.pagination.currentPage}/${this.pagination.pageSize}`).then((res)=>{                                       
+                        this.tableData = res.data;                
+            })
+      }
+    }
+  }
 </script>

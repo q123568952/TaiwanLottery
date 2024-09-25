@@ -18,7 +18,7 @@ public class Lottery539 {
 	private String lotterynumbers;
 	@Column(columnDefinition = "Integer")
 	private Integer lotteryperiod;
-	@Column(columnDefinition = "DATETIME")
+	@Column(columnDefinition = "DATE")
 	private Date lotterytime;
 	@Column(columnDefinition = "DATETIME")
 	private Date createtime;
