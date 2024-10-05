@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.morgan.TaiwanLottery.model.Lottery539;
@@ -32,6 +34,13 @@ public class Lottery539Controller {
 	public List<Lottery539> findAll(@PathVariable Integer page, @PathVariable Integer uploadamount,HttpServletRequest req) {
 		
 		return lottery539Service.findAll(page,uploadamount);
+	}
+	
+	@PostMapping("/MethodNo1")
+	@CrossOrigin
+	public String MethodNo1(@RequestBody String numbers, HttpServletRequest req) {
+		
+		return numbers;
 	}
 
 }
