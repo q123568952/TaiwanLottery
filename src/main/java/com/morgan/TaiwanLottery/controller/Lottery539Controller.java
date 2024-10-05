@@ -36,11 +36,12 @@ public class Lottery539Controller {
 		return lottery539Service.findAll(page,uploadamount);
 	}
 	
-	@PostMapping("/MethodNo1")
+	@PostMapping("/getResult")
 	@CrossOrigin
-	public String MethodNo1(@RequestBody String numbers, HttpServletRequest req) {
+	public String getResult(@RequestBody String condition,HttpServletRequest req) {
+		System.out.println(condition);
 		
-		return numbers;
+		return condition;
 	}
 
 }

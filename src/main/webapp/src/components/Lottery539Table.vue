@@ -1,20 +1,20 @@
 <template>
   <div class="mt-4">
     <el-input
-      v-model="input3"
+      v-model="condition"
       style="max-width: 600px "
       placeholder="請輸入號碼，EX: 01,02,03"
       class="input-with-select"
     >
       <template #prepend>
-        <el-select v-model="select" placeholder="分析方法" style="width: 115px">
+        <el-select v-model="method" placeholder="分析方法" style="width: 115px">
           <el-option label="分析方法一" value="1" />
           <el-option label="分析方法二" value="2" />
           <el-option label="分析方法三" value="3" />
         </el-select>
       </template>
       <template #append>
-        <el-button :icon="Search" />
+        <el-button :icon="Search" @click="getResult()"/>
       </template>
     </el-input>
   </div>
@@ -38,9 +38,9 @@ import { Search } from '@element-plus/icons-vue';
         total: 100,
         queryString: null,
       },    
-      tableData: [],     
-      select : "",
-      input3: ""
+      tableData: [],        
+      method : "",
+      condition: ""            
       }  
     },
     //VUE初始化執行
@@ -56,6 +56,14 @@ import { Search } from '@element-plus/icons-vue';
                                       return ele;
                                      })          
                         this.tableData = data;                
+            })
+      },
+      getResult() {
+        this.axios.post(`http://localhost:8080/getResult`, {
+          condition:this.condition,
+          method:this.method          
+        }).then((res)=>{  
+                                     console.log(res.data);            
             })
       }
     }
