@@ -50,8 +50,12 @@ import { Search } from '@element-plus/icons-vue';
     methods: {    
       //查询
       findPage() {      
-        this.axios.get(`http://localhost:8080/findAll/${this.pagination.currentPage}/${this.pagination.pageSize}`).then((res)=>{                                       
-                        this.tableData = res.data;                
+        this.axios.get(`http://localhost:8080/findAll/${this.pagination.currentPage}/${this.pagination.pageSize}`).then((res)=>{  
+                                     let data = res.data.map((ele)=>{
+                                      ele.lotterytime=new Date(ele.lotterytime).toISOString().split('T')[0];
+                                      return ele;
+                                     })          
+                        this.tableData = data;                
             })
       }
     }
